@@ -33,9 +33,31 @@ const elements = {
 let currentCity = null;
 
 // ===== Initialisation =====
+// ===== Initialisation =====
 document.addEventListener('DOMContentLoaded', () => {
+    // 1. Initialisation existante
     updateNotifyButton();
     registerServiceWorker();
+
+    // 2. BRANCHEMENT DU BOUTON RECHERCHE (C'est ce qui manquait !)
+    // Vérifie que l'élément existe avant d'ajouter l'écouteur pour éviter les erreurs
+    if (elements.searchBtn) {
+        elements.searchBtn.addEventListener('click', handleSearch);
+    }
+
+    // 3. GESTION DE la TOUCHE "ENTRÉE"
+    if (elements.cityInput) {
+        elements.cityInput.addEventListener('keyup', (event) => {
+            if (event.key === 'Enter') {
+                handleSearch();
+            }
+        });
+    }
+
+    // 4. BRANCHEMENT DU BOUTON NOTIFICATION
+    if (elements.notifyBtn) {
+        elements.notifyBtn.addEventListener('click', requestNotificationPermission);
+    }
 });
 
 // ===== Service Worker =====

@@ -1,10 +1,78 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Météo PWA</title>
+
+    <link rel="manifest" href="manifest.json">
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="icon" type="image/png" href="icons/icon-192.png">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 </head>
 <body>
-$END$
+
+<header>
+    <h1>Météo Alerte</h1>
+    <button id="notify-btn" class="icon-btn">🔔</button>
+
+    <button id="theme-toggle" style="display:none;"></button>
+    <button id="favorite-btn" style="display:none;"></button>
+</header>
+
+<main>
+    <section class="search-container">
+        <input type="text" id="city-input" placeholder="Entrez une ville (ex: Lyon)" autocomplete="off">
+        <button id="search-btn">Rechercher</button>
+    </section>
+
+    <div id="loading" class="hidden">
+        <div class="spinner"></div>
+        <p>Chargement des prévisions...</p>
+    </div>
+
+    <div id="error-message" class="hidden"></div>
+
+    <section id="weather-section" class="hidden">
+
+        <div class="current-weather">
+            <h2 id="city-name">--</h2>
+            <div class="main-info">
+                <span id="weather-icon" class="big-icon">--</span>
+                <span id="temperature" class="big-temp">--</span><span class="unit">°C</span>
+            </div>
+            <p class="feels-like">Ressenti <span id="feels-like">--</span></p>
+        </div>
+
+        <div class="details-grid">
+            <div class="detail-card">
+                <span>💨 Vent</span>
+                <strong id="wind">--</strong>
+            </div>
+            <div class="detail-card">
+                <span>💧 Humidité</span>
+                <strong id="humidity">--</strong>
+            </div>
+        </div>
+
+        <div class="hourly-container">
+            <h3>Prochaines 4 heures</h3>
+            <div id="hourly-list" class="hourly-scroll">
+            </div>
+        </div>
+
+    </section>
+
+    <section id="favorites-section" style="display:none;">
+        <ul id="favorites-list"></ul>
+    </section>
+
+</main>
+
+<script src="app.js" defer></script>
 </body>
 </html>

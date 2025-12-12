@@ -202,6 +202,50 @@ main {
     animation: spin 1s linear infinite;
 }
 
+:root {
+    /* --- Couleurs Mode Clair (Par défaut) --- */
+    --bg: #f8fafc;
+    --surface: #ffffff;
+    --text: #1e293b;
+    --text-secondary: #64748b;
+    --primary: #3b82f6;
+    --border: #cbd5e1;
+    --shadow: rgba(0, 0, 0, 0.1);
+}
+
+/* --- Couleurs Mode Sombre --- */
+body.dark-mode {
+    --bg: #0f172a;        /* Bleu nuit très foncé */
+    --surface: #1e293b;   /* Bleu gris foncé */
+    --text: #f1f5f9;      /* Blanc cassé */
+    --text-secondary: #94a3b8;
+    --primary: #60a5fa;   /* Bleu plus clair pour le contraste */
+    --border: #334155;
+    --shadow: rgba(0, 0, 0, 0.3);
+}
+
+/* Application des variables */
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    transition: background-color 0.3s, color 0.3s; /* Transition douce */
+}
+
+/* Mise à jour des éléments pour utiliser les variables */
+header, .current-weather, .detail-card, .hourly-item, #city-input {
+    background-color: var(--surface);
+    color: var(--text);
+    border-color: var(--border);
+}
+
+#city-input {
+    border: 1px solid var(--border);
+}
+
+.hourly-time, .feels-like {
+    color: var(--text-secondary);
+}
+
 @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 @keyframes pulse-blue { 0% { box-shadow: 0 0 0 0 rgba(14, 165, 233, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(14, 165, 233, 0); } 100% { box-shadow: 0 0 0 0 rgba(14, 165, 233, 0); } }
 @keyframes pulse-red { 0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); } 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); } }

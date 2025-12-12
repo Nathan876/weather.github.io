@@ -35,6 +35,7 @@ let currentCity = null;
 document.addEventListener('DOMContentLoaded', () => {
     registerServiceWorker();
 
+    initTheme()
     // Écouteurs UI
     elements.searchBtn?.addEventListener('click', handleSearch);
     elements.cityInput?.addEventListener('keydown', (e) => {
@@ -84,6 +85,7 @@ async function requestNotificationPermission() {
         console.error('Erreur lors de la demande de permission:', error);
     }
 }
+
 
 function sendWeatherNotification(city, message, type = 'info') {
     if (!isNotificationSupported()) return;
@@ -332,4 +334,30 @@ function showError(message) {
 
 function hideError() {
     elements.errorMessage.classList.add('hidden');
+}
+
+
+function initTheme() {
+    const savedTheme = localStorage.getItem(CONFIG.STORAGE_KEY_THEME);
+
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+        document.body.classList.add('dark-mode');
+        if (elements.themeToggle) elements.themeToggle.textContent = '☀️'; // Icône soleil
+    } else {
+        if (elements.themeToggle) elements.themeToggle.textContent = '🌙'; // Icône lune
+    }
+}
+
+function toggleTheme() {
+    document.body.classList.toggle('dark-mode');
+
+    const isDark = document.body.classList.contains('dark-mode');
+
+    if (elements.themeToggle) {
+        elements.themeToggle.textContent = isDark ? '☀️' : '🌙';
+    }
+
+    localStorage.setItem(CONFIG.STORAGE_KEY_THEME, isDark ? 'dark' : 'light');
 }

@@ -38,6 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initTheme()
     // Écouteurs UI
     elements.searchBtn?.addEventListener('click', handleSearch);
+    elements.themeToggle?.addEventListener('click', toggleTheme);
     elements.cityInput?.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') handleSearch();
     });
